@@ -7,7 +7,7 @@
     	* { padding: 0; margin: 0; }
     	canvas { background: #eee; display: block; margin: 0 auto; }
     </style>
-</head>
+</head> 
 <body>
 
 <canvas id="myCanvas" width="480" height="320"></canvas>
@@ -40,6 +40,20 @@
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     
+    function init() {
+        var dx = 2;
+        var dy = -2;
+        var ballRadius = 10;
+    //  Defining the paddle dimensions
+        var paddleHeight = 10;
+        var paddleWidth = 75;
+        var paddleX = (canvas.width - paddleWidth)/2; // starting point of paddle
+
+    // Paddle movement control variables
+        var rightPressed = false;
+        var leftPressed = false;
+    }
+    
     function keyDownHandler(event) {
         if(event.keyCode == 39) {
             rightPressed = true;
@@ -71,10 +85,12 @@
         // touch down game over.
         if(y + dy > canvas.height-ballRadius) {
             if (x > paddleX && x < paddleX + paddleWidth){
-                dy=-dy
+                dy=-1.2*dy;
+                
             }
             else {
                 alert("GAME OVER");
+                init();
                 document.location.reload(true);               
             }
 
