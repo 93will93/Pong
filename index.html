@@ -24,16 +24,26 @@
 // Defining the moving increment
     var dx = 2;
     var dy = -2;
-    
-    function drawBall(){ // Draws the ball at (x, y) co-ordinates
+    var ballRadius = 10;
+
+    function collisionDetection() {
+        if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
+            dy = -dy;
+        }
+        if(x + dx < ballRadius || x + dx > canvas.width- ballRadius) {
+            dx = -dx;
+        }
+    }
+    function drawBall() { // Draws the ball at (x, y) co-ordinates
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
     }
     
     function draw() { // This function clears the canvas and draws everything again every game loop
+        collisionDetection();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall();
         x += dx;
